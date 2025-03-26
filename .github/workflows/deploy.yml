@@ -34,12 +34,13 @@ jobs:
           cd reports
           npm run sources
           npm run build
-          pwd
+          ls
+          ls build
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "reports/build/${{ github.event.repository.name }}"
+          path: "reports/build/${{ github.event.repository.name }}/reports/build"
 
   deploy:
     needs: build

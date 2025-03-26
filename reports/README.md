@@ -3,7 +3,7 @@
 ## Prerequisites
 
 ```bash
-cd src/reports
+cd reports/
 npm install
 npm run dev
 ```

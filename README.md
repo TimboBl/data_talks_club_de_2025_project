@@ -21,6 +21,7 @@ The project implements a complete data pipeline that:
 - [`/terraform`](./terraform/README.md) - Infrastructure as Code for GCP resources
 - [`/kestra`](./kestra/README.md) - Data orchestration workflows
 - [`/src`](./src/README.md) - dbt models and data transformation logic
+- [`/reports`](./reports/README.md) - Evidence reports
 
 ## Getting Started
 
