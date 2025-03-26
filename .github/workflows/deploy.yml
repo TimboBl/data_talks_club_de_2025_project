@@ -34,6 +34,7 @@ jobs:
           cd reports
           npm run sources
           npm run build
+          pwd
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
