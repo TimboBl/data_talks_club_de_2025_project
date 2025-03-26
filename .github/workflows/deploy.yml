@@ -34,12 +34,11 @@ jobs:
           cd reports
           npm run sources
           npm run build
-          pwd
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "/${{ github.event.repository.name }}/build/emissions"
+          path: /home/runner/work/data_talks_club_de_2025_project/data_talks_club_de_2025_project/reports/build/emissions # "/${{ github.event.repository.name }}/build/emissions"
 
   deploy:
     needs: build
