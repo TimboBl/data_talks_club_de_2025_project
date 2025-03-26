@@ -10,12 +10,21 @@ This directory contains a Python virtual environment with dbt-core and dbt-bigqu
 
 ## Using the Virtual Environment
 
+### Creating the Virtual Environment
+
+To create the virtual environment, run the following command from the `src` directory:
+
+```bash
+python3 -m venv venv
+```
+
 ### Activating the Environment
 
 To activate the virtual environment, run the following command from the `src` directory:
 
 ```bash
 source venv/bin/activate
+pip install -r requirements.txt
 ```
 
 Your command prompt should change to indicate that the virtual environment is active.
@@ -74,23 +83,41 @@ The following dbt models have been created for the nitrogen dioxide data:
 1. **Staging Model** (`models/staging/stg_emissions_data.sql`):
    - Creates a view that reads from the external table
    - Parses the combined metadata field (frequency, pollutant, unit, geo code)
-   - Extracts all monthly measurements from 2018-01 to 2025-02
-
-2. **Intermediate Model** (`models/intermediate/int_emissions_unpivoted.sql`):
-   - Unpivots the monthly measurements into a more usable format
+   - Unpivots the monthly measurements from 2018-01 to 2025-02 into a long format
    - Creates a proper date field from the time period strings
-   - Filters out null measurements
 
-3. **Marts Model** (`models/marts/emissions_analysis.sql`):
-   - Provides yearly averages by city and pollutant
-   - Calculates year-over-year changes
-   - Categorizes trends (significant decrease, moderate decrease, stable, etc.)
+2. **Intermediate Model** (`models/intermediate/int_emissions_cleaned.sql`):
+   - Cleans the data from the staging model
+   - Handles null values and data type conversions
+   - Partitions data by measurement date for improved query performance
+
+3. **Dimension Model** (`models/intermediate/int_dim_capitals.sql`):
+   - Provides mapping between geographic codes and capital cities/countries
+   - Used for enriching the emissions data with location information
+
+4. **Seed File** (`seeds/capitals.csv`):
+   - Contains mapping data for European capital cities
+   - Maps geo_codes to capital city names and countries
+   - Used as a dimension table for location enrichment
+   - Loaded using `dbt seed` command
+
+5. **Marts Models**:
+   - **Yearly Analysis** (`models/marts/emissions_analysis.sql`):
+     - Provides yearly averages, minimums, maximums, and totals by city and pollutant
+     - Calculates year-over-year changes
+     - Includes country rankings and comparisons to EU averages
+     - Categorizes trends (significant decrease, moderate decrease, stable, etc.)
+   
+   - **Monthly Analysis** (`models/marts/emissions_analysis_monthly.sql`):
+     - Similar to the yearly analysis but at a monthly granularity
+     - Provides month-over-month trend analysis
+     - Includes monthly rankings and comparisons to EU monthly averages
 
 ### Setup Requirements
 
 Before running the dbt models, ensure:
 
-1. The external table is created in BigQuery pointing to the GCS file
+1. The external table is created in BigQuery pointing to the GCS file. Use `create_external_table.sql` to create the table.
 2. The service account has appropriate permissions to read from GCS and create/modify tables in BigQuery
 
 ### Running the Models
@@ -98,6 +125,7 @@ Before running the dbt models, ensure:
 To run all models in the correct order:
 
 ```bash
+dbt seed --full-refresh
 dbt run
 ```
 
@@ -105,3 +133,12 @@ To run a specific model:
 
 ```bash
 dbt run --select stg_emissions_data
+
+dbt run --select int_emissions_cleaned
+
+dbt run --select int_dim_capitals
+
+dbt run --select emissions_analysis
+
+dbt run --select emissions_analysis_monthly
+```
