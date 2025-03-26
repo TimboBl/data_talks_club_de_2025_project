@@ -17,7 +17,7 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: cd src/reports && npm install
 
       - name: build
         env:
