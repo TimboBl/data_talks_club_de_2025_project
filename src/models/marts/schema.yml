@@ -1,0 +1,71 @@
+version: 2
+
+models:
+  - name: emissions_analysis
+    description: "Analysis-ready model for nitrogen dioxide emissions data with yearly averages and trends"
+    columns:
+      - name: geo_code
+        description: "Geographic code identifying the city or region"
+      - name: year
+        description: "Year of the measurements"
+      - name: airpol
+        description: "Air pollutant type (nitrogen dioxide)"
+      - name: unit
+        description: "Unit of measurement for the pollutant values"
+      - name: avg_value
+        description: "Average measurement value for the year"
+      - name: min_value
+        description: "Minimum measurement value for the year"
+      - name: max_value
+        description: "Maximum measurement value for the year"
+      - name: measurement_count
+        description: "Number of measurements included in the averages"
+      - name: absolute_change
+        description: "Absolute change in average value compared to previous year"
+      - name: percentage_change
+        description: "Percentage change in average value compared to previous year"
+      - name: trend_category
+        description: "Categorized trend based on percentage change (Significant Decrease, Moderate Decrease, Stable, etc.)"
+      - name: analysis_timestamp
+        description: "Timestamp when the analysis was generated"
+  - name: emissions_analysis_monthly
+    description: Monthly analysis of emissions data with trends, rankings, and comparisons to EU averages
+    columns:
+      - name: capital_city
+        description: Capital city name
+      - name: country_name
+        description: Country name
+      - name: geo_code
+        description: Geographic code from Eurostat
+      - name: measurement_date
+        description: Date of measurement (first day of month)
+      - name: year
+        description: Year of measurement
+      - name: month
+        description: Month of measurement (1-12)
+      - name: year_month
+        description: Year and month in YYYY-MM format
+      - name: airpol
+        description: Air pollutant type
+      - name: unit
+        description: Measurement unit
+      - name: measurement_value
+        description: Measured value of emissions
+      - name: absolute_change
+        description: Absolute change from previous month
+      - name: percentage_change
+        description: Percentage change from previous month
+      - name: trend_category
+        description: Categorized trend based on percentage change
+      - name: pollution_rank_asc
+        description: Country rank by pollution level (ascending, 1 = lowest pollution)
+      - name: pollution_rank_desc
+        description: Country rank by pollution level (descending, 1 = highest pollution)
+      - name: pollution_percentile
+        description: Percentile rank of pollution level within month and unit
+      - name: exceeds_eu_average
+        description: Flag indicating if value exceeds EU average
+      - name: percent_diff_from_eu_avg
+        description: Percentage difference from EU average
+      - name: analysis_timestamp
+        description: Timestamp when analysis was generated

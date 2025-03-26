@@ -1,0 +1,36 @@
+id: eu_emissions_pipeline
+namespace: eu.emissions
+
+tasks:
+  - id: fetch_data
+    type: io.kestra.plugin.scripts.shell.Commands
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    commands:
+      - curl -L "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/env_air_no2?format=TSV&compressed=true" | gunzip | sed 's/:/0.0/g' >> nitrogen_dioxide_per_city.tsv
+    outputFiles:
+      - nitrogen_dioxide_per_city.tsv
+
+  - id: upload_to_gcs
+    type: io.kestra.plugin.gcp.gcs.Upload
+    from: "{{ outputs.fetch_data['outputFiles']['nitrogen_dioxide_per_city.tsv'] }}"
+    to: "gs://data-talk-clubs-eu-emissions-dev/raw/nitrogen_dioxide_per_city.tsv"
+    description: "Upload nitrogen dioxide data to GCS"
+
+  - id: run_dbt
+    type: io.kestra.plugin.scripts.shell.Commands
+    dependsOn:
+      - upload_to_gcs
+    taskRunner:
+      type: io.kestra.plugin.scripts.runner.docker.Docker
+    containerImage: "ghcr.io/dbt-labs/dbt-bigquery:1.7.3"
+    commands:
+      - |
+        # Run dbt models
+        cd /dbt && dbt run
+    description: "Run dbt models to transform data in BigQuery"
+    volumes:
+      - "{{ workingDir }}:/tmp/kestra"
+      - "../src:/dbt"
+    envs:
+      GOOGLE_APPLICATION_CREDENTIALS: "/app/service-account.json"

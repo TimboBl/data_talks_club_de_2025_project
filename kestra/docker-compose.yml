@@ -1,0 +1,73 @@
+volumes:
+  postgres-data:
+    driver: local
+
+services:
+  postgres:
+    image: postgres:latest
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: kestra
+      POSTGRES_USER: kestra
+      POSTGRES_PASSWORD: k3str4
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+
+  kestra:
+    image: kestra/kestra:latest
+    pull_policy: always
+    user: "root"
+    command: server standalone
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp/kestra-wd:/tmp/kestra-wd
+      - ./service-account.json:/app/service-account.json:ro
+      - ./flows:/app/flows:ro
+    environment:
+      KESTRA_CONFIGURATION: |
+        kestra:
+          repository:
+            type: postgres
+          queue:
+            type: postgres
+          tutorial-flows:
+            enabled: false
+          storage:
+            type: gcs
+            gcs:
+              bucket: ${GCS_BUCKET}
+          # plugins:
+          #   defaults:
+          #     - type: io.kestra.plugin.scripts.shell.Commands
+          #       forced: true
+          #       values:
+          #         containerImage: alpine:latest
+          #         taskRunner:
+          #           type: io.kestra.plugin.scripts.runner.docker.Docker
+          #   configurations:
+          #     - type: io.kestra.plugin.scripts.runner.docker.Docker
+          #       values:
+          #         volumeEnabled: true                
+          url: http://localhost:8080
+
+        micronaut:
+          server:
+            port: 8080
+
+        datasources:
+          postgres:
+            url: jdbc:postgresql://postgres:5432/kestra
+            driverClassName: org.postgresql.Driver
+            username: kestra
+            password: k3str4
+      GOOGLE_APPLICATION_CREDENTIALS: /app/service-account.json
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_started

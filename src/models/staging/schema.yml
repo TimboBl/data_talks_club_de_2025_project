@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: stg_emissions_data
+    description: "Staging model for nitrogen dioxide emissions data from external GCS tables"
+    columns:
+      - name: id
+        description: "Unique identifier for the record"
+      - name: frequency
+        description: "Frequency of the measurements (e.g., monthly)"
+      - name: airpol
+        description: "Air pollutant type (nitrogen dioxide)"
+      - name: unit
+        description: "Unit of measurement for the pollutant values"
+      - name: geo_code
+        description: "Geographic code identifying the city or region"
+      - name: time_period
+        description: "Array of time periods with corresponding measurement values"
+      - name: load_timestamp
+        description: "Timestamp when the data was loaded into BigQuery"

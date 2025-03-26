@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: int_emissions_unpivoted
+    description: "Intermediate model that unpivots the nitrogen dioxide measurements into a more usable format"
+    columns:
+      - name: id
+        description: "Unique identifier for the record"
+      - name: frequency
+        description: "Frequency of the measurements (e.g., monthly)"
+      - name: airpol
+        description: "Air pollutant type (nitrogen dioxide)"
+      - name: unit
+        description: "Unit of measurement for the pollutant values"
+      - name: geo_code
+        description: "Geographic code identifying the city or region"
+      - name: measurement_date
+        description: "Date of the measurement in DATE format"
+      - name: time_period
+        description: "String representation of the measurement period (YYYY-MM)"
+      - name: measurement_value
+        description: "The actual measurement value for the pollutant"
+      - name: load_timestamp
+        description: "Timestamp when the data was loaded into BigQuery"

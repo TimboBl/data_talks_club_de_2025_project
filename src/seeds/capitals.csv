@@ -1,0 +1,33 @@
+Capital,Country,geo_code
+Vienna,Austria,AT_CAP
+Brussels,Belgium,BE_CAP
+Sofia,Bulgaria,BG_CAP
+Bern,Switzerland,CH_CAP
+Nicosia,Cyprus,CY_CAP
+Prague,Czech Republic,CZ_CAP
+Berlin,Germany,DE_CAP
+Copenhagen,Denmark,DK_CAP
+Tallinn,Estonia,EE_CAP
+Athens,Greece,EL_CAP
+Madrid,Spain,ES_CAP
+Brussels,Europe,EU27_2020
+Helsinki,Finland,FI_CAP
+Paris,France,FR_CAP
+Zagreb,Croatia,HR_CAP
+Budapest,Hungary,HU_CAP
+Dublin,Ireland,IE_CAP
+Reykjavik,Iceland,IS_CAP
+Rome,Italy,IT_CAP
+Vilnius,Lithuania,LT_CAP
+Luxembourg City,Luxembourg,LU_CAP
+Riga,Latvia,LV_CAP
+Valletta,Malta,MT_CAP
+Amsterdam,Netherlands,NL_CAP
+Oslo,Norway,NO_CAP
+Warsaw,Poland,PL_CAP
+Lisbon,Portugal,PT_CAP
+Bucharest,Romania,RO_CAP
+Stockholm,Sweden,SE_CAP
+Ljubljana,Slovenia,SI_CAP
+Bratislava,Slovakia,SK_CAP
+Ankara,Turkey,TR_CAP
