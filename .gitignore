@@ -5,3 +5,4 @@ terraform.tfvars
 venv/
 logs/
 .terraform/
+package-lock.json
