@@ -1,4 +1,4 @@
-kestra/service-account.json
-kestra/flows/.env
-src/reports/sources/connection.options.yaml
+./kestra/service-account.json
+./kestra/flows/.env
+./src/reports/sources/connection.options.yaml
 
