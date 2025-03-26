@@ -34,7 +34,7 @@ jobs:
           cd reports
           npm run sources
           npm run build
-          ls build/emissions
+          ls ..build/emissions
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
