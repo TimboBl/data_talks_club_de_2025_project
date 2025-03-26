@@ -34,7 +34,6 @@ jobs:
           cd reports
           npm run sources
           npm run build
-          ls
           ls build/emissions
 
       - name: Upload Artifacts
