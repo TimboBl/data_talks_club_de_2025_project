@@ -31,6 +31,7 @@ jobs:
           EVIDENCE_SOURCE__eu_emissions__project_id: ${{ secrets.EVIDENCE_SOURCE__eu_emissions__project_id }}
           EVIDENCE_SOURCE__needful_things__filename: ${{ secrets.EVIDENCE_SOURCE__needful_things__filename }}
         run: |
+          cd reports
           npm run sources
           npm run build
 
