@@ -35,7 +35,7 @@ jobs:
           npm run sources
           npm run build
           ls
-          ls build
+          ls build/emissions
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
