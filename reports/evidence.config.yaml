@@ -80,4 +80,4 @@ plugins:
     "@evidence-dev/trino": {}
     "@evidence-dev/motherduck": {}
 deployment:
-  basePath: ""
+  basePath: "/data_talks_club_de_2025_project"
