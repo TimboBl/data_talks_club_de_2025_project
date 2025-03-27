@@ -34,12 +34,11 @@ jobs:
           cd reports
           npm run sources
           npm run build
-          echo "/${{ github.event.repository.name }}"
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "reports/build/emissions" # "/${{ github.event.repository.name }}/build/emissions"
+          path: "reports/build/emissions"
 
   deploy:
     needs: build
