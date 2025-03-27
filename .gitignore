@@ -1,7 +1,9 @@
 .env 
+.DS_Store
 *.options.yaml
 service-account.json
 terraform.tfvars
 **/*/venv/*
 **/*/logs/*
 **/*/.terraform/*
+**/*/node_modules/*
