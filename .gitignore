@@ -7,3 +7,4 @@ terraform.tfvars
 **/*/logs/*
 **/*/.terraform/*
 **/*/node_modules/*
+**/*/target/*
