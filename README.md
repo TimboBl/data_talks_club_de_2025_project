@@ -3,6 +3,9 @@
 This repository contains infrastructure, data pipelines, and analysis tools for processing and analyzing EU emissions data, with a focus on nitrogen dioxide emissions across European cities.
 The project was done during the DataTalks Zoomcamp for Data Engineering 2025. 
 
+## Visualization
+The webpage with visualizations using [Evidence](evidence.dev) can be found [here](https://timbobl.github.io/data_talks_club_de_2025_project/).
+
 The Problem I wanted to solve was downloading some data from the European Union Data Repository ([Eurostat](https://ec.europa.eu/eurostat/data/database)) and processing it in BigQuery.
 The Dataset I chose was [Nitrogen dioxide per city](https://ec.europa.eu/eurostat/data/database?dataset=env_air_no2).
 The following paragraphs explain how this was done and also instruct how to reproduce the project.
